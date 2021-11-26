@@ -10,14 +10,8 @@ opts_chunk$set(warning=FALSE,
                comment = "#>")
 
 
-## ----install-devtools---------------------------------------------------------
-#  install.packages("devtools")
-
-## ----install-whomds-----------------------------------------------------------
-#  devtools::install_github("lindsayevanslee/whomds")
-
-## ----install-whomds-manually--------------------------------------------------
-#  devtools::install("C:/Users/leel/Downloads/whomds-master") #use path to unzipped folder downloaded from Github
+## ----install-cran-------------------------------------------------------------
+#  install.packages("whomds")
 
 ## ----open-whomds--------------------------------------------------------------
 #  library(whomds)

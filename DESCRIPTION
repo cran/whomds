@@ -1,7 +1,7 @@
 Package: whomds
 Type: Package
 Title: Calculate Results from WHO Model Disability Survey Data
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(person("Lindsay", "Lee", email = "lindsayevanslee@gmail.com", role = c("aut","cre")), person("Carolina", "Fellinghauer", email = "carolina.fellinghauer@data-fittery.ch", role = c("ctb")),  person("World Health Organization", email = "disability@who.int", role = "cph"))
 Description: The Model Disability Survey (MDS) <https://www.who.int/disabilities/data/en/> is a World Health Organization (WHO) general population survey
     instrument to assess the distribution of disability within a country or 
@@ -11,7 +11,7 @@ Description: The Model Disability Survey (MDS) <https://www.who.int/disabilities
     the WHO. The package primarily provides functions for implementing
     Rasch Analysis (see Andrich (2011) <doi:10.1586/erp.11.59>) to
     calculate a metric scale for disability.
-License: file LICENSE
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Imports: colorspace, dplyr, eRm, foreign, ggraph, ggplot2, GPArotation,
@@ -25,10 +25,10 @@ RoxygenNote: 7.1.1
 Suggests: covr, testthat, knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-11-23 03:57:15 UTC; lindsaylee
+Packaged: 2021-11-26 03:13:26 UTC; lindsaylee
 Author: Lindsay Lee [aut, cre],
   Carolina Fellinghauer [ctb],
   World Health Organization [cph]
 Maintainer: Lindsay Lee <lindsayevanslee@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-11-23 18:30:02 UTC
+Date/Publication: 2021-11-26 14:40:02 UTC
