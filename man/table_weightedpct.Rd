@@ -25,11 +25,11 @@ table_weightedpct(
 \arguments{
 \item{df}{a data frame of individual survey data, where each row is an individual}
 
-\item{vars_ids}{a character vector of cluster ids, passed to a \code{survey::svydesign} object}
+\item{vars_ids}{a character vector of cluster ids, passed to \code{srvyr::as_survey_design()}}
 
-\item{vars_strata}{a character vector of strata ids, passed to a \code{survey::svydesign} object}
+\item{vars_strata}{a character vector of strata ids, passed to \code{srvyr::as_survey_design()}}
 
-\item{vars_weights}{a character vector of survey weight ids, passed to a \code{survey::svydesign} object}
+\item{vars_weights}{a character vector of survey weight ids, passed to \code{srvyr::as_survey_design()}}
 
 \item{formula_vars}{a character vector of variables to calculate the percentages of each level for}
 
@@ -43,15 +43,15 @@ table_weightedpct(
 
 \item{willfilter}{a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.}
 
-\item{add_totals}{logical determinging whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Default is FALSE.}
+\item{add_totals}{logical determining whether to create total rows or columns (as appropriate) that demonstrate the margin that sums to 100. Default is FALSE.}
 
-\item{spread_key}{a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.}
+\item{spread_key}{a string with variable name to pass to \code{names_from} argument of \code{tidyr::pivot_wider()}. Default is \code{NULL}.}
 
-\item{spread_value}{a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)}
+\item{spread_value}{a string with variable name to pass to \code{values_from} argument of \code{tidyr::pivot_wider()}. Default is "prop" (the column of percentages created within the function)}
 
 \item{arrange_vars}{a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.}
 
-\item{include_SE}{a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmutting.}
+\item{include_SE}{a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmuting.}
 }
 \value{
 a tibble of weighted response percentages or N's

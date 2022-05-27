@@ -5,12 +5,12 @@
 
 <!-- badges: start -->
 
-[![Build
-Status](https://app.travis-ci.com/lindsayevanslee/whomds.svg?branch=master)](https://app.travis-ci.com/lindsayevanslee/whomds)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/lindsayevanslee/whomds?branch=master&svg=true)](https://ci.appveyor.com/project/lindsayevanslee/whomds)
-[![codecov](https://codecov.io/gh/lindsayevanslee/whomds/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lindsayevanslee/whomds)
+[![R-CMD-check](https://github.com/lindsayevanslee/whomds/workflows/R-CMD-check/badge.svg)](https://github.com/lindsayevanslee/whomds/actions)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/whomds)](https://CRAN.R-project.org/package=whomds)
 [![lifecycle](https://lifecycle.r-lib.org/articles/figures/lifecycle-stable.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Codecov test
+coverage](https://codecov.io/gh/lindsayevanslee/whomds/branch/master/graph/badge.svg)](https://app.codecov.io/gh/lindsayevanslee/whomds?branch=master)
 <!-- badges: end -->
 
 ## Introduction
@@ -78,4 +78,5 @@ browseVignettes("whomds")
 
 ## Contact
 
-Please contact the package maintainer with any questions or comments.
+Please contact the package maintainer with any questions or comments, or
+[submit an issue](https://github.com/lindsayevanslee/whomds/issues).

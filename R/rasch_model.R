@@ -165,7 +165,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
   LID_results <- LID_results %>%   
     tibble::rownames_to_column("var1") %>% 
     as_tibble() %>% 
-    tidyr::gather(key = "var2", value = "LID", -var1) %>% 
+    tidyr::pivot_longer(!var1, names_to = "var2", values_to = "LID") %>% 
     filter(LID == 1) %>% 
     select(-LID) %>% 
     tidyr::unite(col = "vars", var1, var2, sep = " & ") %>% 
@@ -177,7 +177,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
   
   PCA <- try(stats::prcomp(LID,center=TRUE, retx=TRUE), silent=TRUE)
   Eigen_Value <- try(eigen(LID)$values, silent=TRUE)
-  if (!any(class(Eigen_Value)=="try-error")) {
+  if (!any(inherits(Eigen_Value, "try-error"))) {
     Percentage_Eigen_Value <- Eigen_Value/sum(Eigen_Value)*100
     Cumulative_Percentage_Eigen_Value <- cumsum(Percentage_Eigen_Value)
     Eigen_Value_Table <- cbind(Eigen_Value,Percentage_Eigen_Value,Cumulative_Percentage_Eigen_Value)
@@ -234,7 +234,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
     utils::write.csv(Residuals_PCM_Recoded,file=paste0(path_output,"/Residuals_PCM.csv"))
     
     #data with abilities
-    utils::write.csv(data_persons, paste0(path_output,"/DatawAbilities.csv"),row.names = FALSE)
+    readr::write_csv(data_persons, paste0(path_output,"/DatawAbilities.csv"))
     
     #person parameters
     utils::write.csv(Person_Abilities, file=paste0(path_output,"/PersonPara.csv"))
@@ -247,11 +247,11 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
     grDevices::dev.off()
     
     #PCA
-    if (!any(class(Eigen_Value)=="try-error")) {
+    if (!any(inherits(Eigen_Value, "try-error"))) {
       utils::write.csv(Eigen_Value_Table, file= paste0(path_output,"/Original_Data_Eigenvalues.csv"))
       }
     
-    if (!any(class(PCA)=="try-error")) {
+    if (!any(inherits(PCA, "try-error"))) {
       utils::write.csv(PCA$rotation, file=paste0(path_output,"/Original_Data_PCA.csv"))
       
       grDevices::pdf(paste0(path_output,"/Original_Data_Screeplot.pdf"))

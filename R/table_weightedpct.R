@@ -1,18 +1,18 @@
 #' Calculate table of percentages or N of response distribution for survey items, survey weighted, disaggregated
 #'
-#' @param vars_ids a character vector of cluster ids, passed to a \code{survey::svydesign} object
-#' @param vars_strata a character vector of strata ids, passed to a \code{survey::svydesign} object
-#' @param vars_weights a character vector of survey weight ids, passed to a \code{survey::svydesign} object
+#' @param vars_ids a character vector of cluster ids, passed to \code{srvyr::as_survey_design()}
+#' @param vars_strata a character vector of strata ids, passed to \code{srvyr::as_survey_design()}
+#' @param vars_weights a character vector of survey weight ids, passed to \code{srvyr::as_survey_design()}
 #' @param formula_vars a character vector of variables to calculate the percentages of each level for
 #' @param ... captures expressions to pass to \code{dplyr::filter()} or \code{dplyr::transmute()}, depending on the value of argument \code{willfilter}. See Details.
 #' @param formula_vars_levels a vector of the levels of the the \code{formula_vars}
 #' @param by_vars a character vector of variables to disaggregate results by. Default is \code{NULL} for no disaggregation. The columns listed must not include NAs.
 #' @param pct a logical variable indicating whether or not to calculate weighted percentages. Default is \code{TRUE} for weighted percentages. Set to \code{FALSE} for weighted N.
 #' @param willfilter a logical variable that tells the function whether or not to filter or transmute the data. Leave as default \code{NULL} to not filter or transmute. Set as \code{TRUE} to filter and \code{FALSE} to transmute. See Details.
-#' @param spread_key a string with variable name to pass to \code{key} argument of \code{tidyr::spread()}. Default is \code{NULL}.
-#' @param spread_value a string with variable name to pass to \code{value} argument of \code{tidyr::spread()}. Default is "prop" (the columm of percentages created within the function)
+#' @param spread_key a string with variable name to pass to \code{names_from} argument of \code{tidyr::pivot_wider()}. Default is \code{NULL}.
+#' @param spread_value a string with variable name to pass to \code{values_from} argument of \code{tidyr::pivot_wider()}. Default is "prop" (the column of percentages created within the function)
 #' @param arrange_vars a character vector with variables to pass to \code{dplyr::arrange()}. Default is NULL.
-#' @param include_SE a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmutting.
+#' @param include_SE a logical variable indicating whether to include the standard errors in the table. Default is FALSE. Currently does not work when adding totals, spreading or transmuting.
 #' @inheritParams rasch_mds
 #' @inheritParams table_unweightedpctn
 #' 
@@ -74,12 +74,11 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   
   #convert data to long format using variables from formula_vars
   df <- df %>%
-    tidyr::gather(
-      key = "item",
-      value = "resp",
-      !!!rlang::syms(formula_vars),
-      factor_key = TRUE,
-      na.rm = TRUE
+    tidyr::pivot_longer(
+      c(!!!rlang::syms(formula_vars)),
+      names_to = "item",
+      values_to = "resp",
+      values_drop_na = TRUE
     ) %>%
     # mutate(resp = ordered(resp, levels = formula_vars_levels),
     mutate(resp = factor(resp, levels = formula_vars_levels),
@@ -157,12 +156,12 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   if (add_totals) {
     prevtab <- prevtab %>% 
       group_by_at(c(by_vars, "item")) %>% 
-      nest() %>% 
+      tidyr::nest() %>% 
       mutate(data = purrr::map(data, function(df) {
         df %>% 
           add_row(resp := "Total", prop = sum(df$prop, na.rm = TRUE))
       })) %>% 
-      unnest()
+      tidyr::unnest(cols = c(data))
     
   }
   
@@ -170,7 +169,7 @@ table_weightedpct <- function(df, vars_ids, vars_strata, vars_weights,
   #spread 
   if (!is.null(spread_key)) {
     prevtab <- prevtab %>%
-      tidyr::spread(key = !!rlang::sym(spread_key), value = !!rlang::sym(spread_value))
+      tidyr::pivot_wider(names_from = !!rlang::sym(spread_key), values_from = !!rlang::sym(spread_value))
   }
   
   #arrange

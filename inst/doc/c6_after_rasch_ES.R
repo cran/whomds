@@ -119,7 +119,7 @@ table_weightedpct(
   willfilter = FALSE,
   disability_cat, sex, item, problems = `4`+`5`
   ) %>% 
-    spread(key = disability_cat, value = problems)
+    pivot_wider(names_from = disability_cat, values_from = problems)
 
 ## ----table-unweightedpctn-example, eval=TRUE----------------------------------
 table_unweightedpctn(df_adults_noNA, 

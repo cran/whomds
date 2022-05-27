@@ -12,7 +12,7 @@
 #' @param testlet_strategy a list giving the strategy to take for creating testlets, passed to \code{rasch_testlet()}. One element of the list per testlet to create. Each element of the list must be a character vector of column names to use for the testlet. Optionally, name the element of the list to give the name of the new testlet. Otherwise, the new testlet will be the original column names separated by "_". Default is NULL, to not create testlets.
 #' @param recode_strategy a named list giving the strategy to take for recoding variables, passed to \code{rasch_recode()}. One element of the list per recode strategy. Each element of the list is a numeric vector giving the new values to map the variables to. The names of the list are the groups of column names to use for each recoding strategy, separated only by ",". Default is NULL, to not recode items.
 #' @param drop_vars a character vector of column names to drop from the Rasch Analysis. Default is NULL, to not drop items.
-#' @param split_strategy a named list giving the strategy to take for spliting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.
+#' @param split_strategy a named list giving the strategy to take for splitting variables by categories, passed to \code{rasch_split()}. One element of the list per variable to split by. Each element of the list must be a character vector of column names to split. The names of the list are the variables to split each group of variables by. Default is NULL, to not split items.
 #' @param comment a string giving a comment describing the analysis, printed to a txt file. Default is NULL, to not print a comment.
 #'
 #' @details This function combines all of the separate analyses of model fit necessary to assess the quality of the Rasch Model. It is designed to require minimal intervention from the user. Users wishing to have more control over the analysis can use the other Rasch functions in this package separately.
@@ -128,7 +128,7 @@ rasch_mds <- function(df,
     if (print_results) {
       testlet_strategy %>% 
         tibble::enframe(name = "testlet", value = "original_var") %>% 
-        tidyr::unnest(original_var) %>% 
+        tidyr::unnest(cols = original_var) %>% 
         readr::write_csv(file = paste0(path_output, "/testlet_strategy.csv"))
       
     }
@@ -203,7 +203,7 @@ rasch_mds <- function(df,
       purrr::map(~ table(resp = ., useNA = "always")) %>% 
       purrr::map(~ as_tibble(.)) %>% 
       bind_rows(.id = "Q") %>% 
-      tidyr::spread(Q,n) %>% 
+      tidyr::pivot_wider(names_from = Q, values_from = n) %>% 
       dplyr::mutate(resp = as.numeric(resp)) %>% 
       dplyr::arrange(resp) %>% 
       readr::write_csv(paste0(path_output, "/response_freq.csv"))
@@ -283,7 +283,7 @@ rasch_mds <- function(df,
                             vars_id = vars_id)
   
   # PRINT DATA ---------
-  if (print_results) df_final %>% readr::write_csv(path = paste0(path_output, "/Data_final.csv"))
+  if (print_results) df_final %>% readr::write_csv(file = paste0(path_output, "/Data_final.csv"))
   
   
   # PREPARE RESULTS DF ROW ----------

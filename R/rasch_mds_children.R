@@ -2,7 +2,7 @@
 #'
 #' @param vars_group a string with the column name identifying grouping variable
 #' @param vars_metric_common a character vector the common items among all individuals
-#' @param vars_metric_grouped a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corrsponding items for each group.
+#' @param vars_metric_grouped a named list of character vectors with the items to use in the Rasch Analysis per group. The list should have names corresponding to the different groups, and contain character vectors of the corresponding items for each group.
 #' @param TAM_model a string with the type of IRT model to use, passed to \code{irtmodel} argument of \code{TAM::tam()}. Default is \code{"PCM2"}
 #' @param vars_DIF Currently does nothing. In the future, a string with the column names to use for analyzing differential item functioning (DIF). Default is NULL, to skip analysis of DIF.
 #' @param has_at_least_one a numeric vector with the response options that a respondent must have at least one of in order to be included in the metric calculation. See details for more information.
@@ -91,20 +91,20 @@ rasch_mds_children <- function(df,
   
   #recode non-resp_opts to NA, make vars_id character
   to_NA <- df %>% 
-    select(helper_varslist(vars_metric)) %>% 
+    select(all_of(helper_varslist(vars_metric))) %>% 
     unlist() %>% 
     unique() %>% 
     setdiff(c(resp_opts, NA))
   
   df <- df %>%
-    mutate_at(vars(helper_varslist(vars_metric)),
+    mutate_at(vars(all_of(helper_varslist(vars_metric))),
               list(~ plyr::mapvalues(., 
                                      from = to_NA, 
                                      to = rep(NA, length(to_NA)), 
                                      warn_missing = FALSE)
                    )
               ) %>% 
-    mutate_at(vars(vars_id), list(~ as.character(.)))
+    mutate_at(vars(all_of(vars_id)), list(~ as.character(.)))
   
   #remove people with too many NAs
   rm_rows <- df %>% 
@@ -118,7 +118,7 @@ rasch_mds_children <- function(df,
   
   #convert values to start at 0
   df <- df %>%
-    mutate_at(vars(helper_varslist(vars_metric)),
+    mutate_at(vars(all_of(helper_varslist(vars_metric))),
               list(~ as.numeric(as.character(.)) - 1))
   
   
@@ -133,7 +133,7 @@ rasch_mds_children <- function(df,
   # keep only those with at least one of vars_metric in has_at_least_one ---------
   if (!is.null(has_at_least_one)) {
     df <- df %>% 
-      filter_at(vars(helper_varslist(vars_metric)), 
+      filter_at(vars(all_of(helper_varslist(vars_metric))), 
                 any_vars(. %in% (has_at_least_one - 1)))
   }
   
@@ -215,7 +215,7 @@ rasch_mds_children <- function(df,
       purrr::map(~ table(resp = ., useNA = "always")) %>% 
       purrr::map(~ as_tibble(.)) %>% 
       bind_rows(.id = "Q") %>% 
-      tidyr::spread(Q,n) %>% 
+      tidyr::pivot_wider(names_from = Q, values_from = n) %>% 
       readr::write_csv(paste0(path_output, "/response_freq.csv"))
     
   }
@@ -273,7 +273,7 @@ rasch_mds_children <- function(df,
                                      vars_id = vars_id)
   
   # PRINT DATA ---------
-  if (print_results) df_final %>% readr::write_csv(path = paste0(path_output, "/Data_final.csv"))
+  if (print_results) df_final %>% readr::write_csv(file = paste0(path_output, "/Data_final.csv"))
   
   
   # RETURN DATA WITH SCORE ----------
