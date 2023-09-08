@@ -29,27 +29,27 @@ document.addEventListener('DOMContentLoaded', function(e) {
 </script>
 
 <style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
 
 
 
 <style type="text/css">
-  code {
-    white-space: pre;
-  }
-  .sourceCode {
-    overflow: visible;
-  }
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
 </style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -63,55 +63,54 @@ pre > code.sourceCode { white-space: pre-wrap; }
 pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
-  { counter-reset: source-line 0; }
+{ counter-reset: source-line 0; }
 pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
+{ position: relative; left: -4em; counter-increment: source-line; }
 pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
 div.sourceCode
-  {   }
+{ }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
 </style>
 <script>
 // apply pandoc div.sourceCode style to pre.sourceCode instead
@@ -120,13 +119,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   for (var i = 0; i < sheets.length; i++) {
     if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
     try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
+    var j = 0;
+    while (j < rules.length) {
       var rule = rules[j];
       // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -383,25 +389,25 @@ thresholds</li>
 the arguments. Help files for functions in <code>R</code> can be
 accessed by writing <code>?</code> before the function name, like
 so:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>?rasch_mds</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>?rasch_mds</span></code></pre></div>
 <p>Below is an example of a use of the function
 <code>rasch_mds()</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rasch_mds</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Start&quot;</span>,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Initial run&quot;</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">rasch_mds</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Start&quot;</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Initial run&quot;</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>)</span></code></pre></div>
 <p>The first argument is <code>df</code>. This argument is for the data.
 The data object should be individual survey data, with one row per
 individual. Here the data is stored in an object <code>df_adults</code>,
@@ -496,13 +502,13 @@ with a new name of <code>new</code>, and another testlet from
 <code>EF5</code> and <code>EF7</code>, without a new name specified.
 Then you would specify <code>testlet_strategy</code> as the
 following:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rasch_mds</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  ..., </span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">new =</span> <span class="fu">c</span>(<span class="st">&quot;EF4&quot;</span>, <span class="st">&quot;EF6&quot;</span>, <span class="st">&quot;EF8&quot;</span>),</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">&quot;EF5&quot;</span>, <span class="st">&quot;EF7&quot;</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">rasch_mds</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  ..., </span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    <span class="at">new =</span> <span class="fu">c</span>(<span class="st">&quot;EF4&quot;</span>, <span class="st">&quot;EF6&quot;</span>, <span class="st">&quot;EF8&quot;</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">&quot;EF5&quot;</span>, <span class="st">&quot;EF7&quot;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  )</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="recoding" class="section level2">
 <h2>Recoding</h2>
@@ -518,13 +524,13 @@ response options to map the variables to.</p>
 of the variables <code>EF1</code> and <code>EF2</code>, and collapse the
 first two response options of <code>EF3</code>, then you would set
 <code>recode_strategy</code> as the following:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rasch_mds</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  ..., </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="fu">list</span>(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;EF1,EF2&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;EF3&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">rasch_mds</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  ..., </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="fu">list</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="st">&quot;EF1,EF2&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>),</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    <span class="st">&quot;EF3&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  )</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="dropping-variables" class="section level2">
 <h2>Dropping variables</h2>
@@ -534,10 +540,10 @@ vector of the column names to drop from the analysis.</p>
 <p>For example, if the items <code>EF4</code> and <code>EF7</code> were
 extremely poorly fitting items, then they could be dropped from the
 analysis by setting <code>drop_vars</code> as the following:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rasch_mds</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  ..., </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="fu">c</span>(<span class="st">&quot;EF4&quot;</span>, <span class="st">&quot;EF7&quot;</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">rasch_mds</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  ..., </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="fu">c</span>(<span class="st">&quot;EF4&quot;</span>, <span class="st">&quot;EF7&quot;</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="splitting" class="section level2">
 <h2>Splitting</h2>
@@ -561,13 +567,13 @@ the list are the variables to split each group of variables by.</p>
 <code>EF2</code> by <code>sex</code>, and split <code>EF3</code> by age
 category <code>age_cat</code>, then we would set
 <code>split_strategy</code> to be the following:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rasch_mds</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  ..., </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="fu">list</span>(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;EF1&quot;</span>, <span class="st">&quot;EF2&quot;</span>),</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_cat =</span> <span class="fu">c</span>(<span class="st">&quot;EF3&quot;</span>)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">rasch_mds</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  ..., </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="fu">list</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;EF1&quot;</span>, <span class="st">&quot;EF2&quot;</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    <span class="at">age_cat =</span> <span class="fu">c</span>(<span class="st">&quot;EF3&quot;</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  )</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>)</span></code></pre></div>
 <p>However, because we expect a certain amount of DIF when measuring
 disability–especially by sex and age–we rarely use this option. To not
 perform any splitting, leave <code>split_strategy</code> as its default
@@ -585,22 +591,22 @@ from the questionnaire. These are questions <code>EF1</code> to
 <p>We will start by trying to run the model without performing any
 adjustments on our data. To run this model, run a command that is
 similar to this:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Start&quot;</span>,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Initial run&quot;</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>start <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Start&quot;</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Initial run&quot;</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>)</span></code></pre></div>
 <p>The code you run may not be exactly the same, because for instance
 the directory you use for <code>path_parent</code> will be specific to
 your machine, and you may choose a different <code>model_name</code> and
@@ -713,22 +719,22 @@ We will do this by creating a testlet between these two items. We do
 this by changing the argument <code>testlet_stratey</code> as shown
 below. We have given the new testlet the name <code>workschool</code>,
 but you could name it whatever you wished.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>testlet1 <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Testlet1&quot;</span>,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="st">&quot;EF11&quot;</span>, <span class="st">&quot;EF12&quot;</span>)),</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Testlet: EF11,EF12 (LID&gt;0.25)&quot;</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>testlet1 <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Testlet1&quot;</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="st">&quot;EF11&quot;</span>, <span class="st">&quot;EF12&quot;</span>)),</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Testlet: EF11,EF12 (LID&gt;0.25)&quot;</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>)</span></code></pre></div>
 <p>After running this model, we get an error:</p>
 <pre><code>#&gt; Error in tapply(1L:ncol(X01beta), mt_ind, function(xin) { :
 #&gt;       arguments must have same length</code></pre>
@@ -790,22 +796,22 @@ thresholds, which will now hopefully be in the proper order.</p>
 <p>At the next iteration, we will try to recode the response options of
 our testlet so that the model is able to run.</p>
 <p>We will run the command like below:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>testlet1_recode1 <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Testlet1_Recode1&quot;</span>,</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="st">&quot;EF11&quot;</span>, <span class="st">&quot;EF12&quot;</span>)),</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)),</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5&quot;</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>testlet1_recode1 <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Testlet1_Recode1&quot;</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="st">&quot;EF11&quot;</span>, <span class="st">&quot;EF12&quot;</span>)),</span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)),</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5&quot;</span></span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>)</span></code></pre></div>
 <p>The difference between the Testlet1 model and this model is that we
 have now added a recoding strategy. We will recode the response options
 of the testlet <code>workschool</code> to 0,1,2,3,4,5,5,5,5. This means
@@ -842,23 +848,23 @@ acheive ordered thresholds. We will try first to collapse the first two
 thresholds for all items that are not the testlet. We will see which
 items this works for, and try a new strategy at the next iteration for
 the items where it did not work.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>testlet1_recode2 <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Testlet1_Recode2&quot;</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="st">&quot;EF11&quot;</span>, <span class="st">&quot;EF12&quot;</span>)),</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>),</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;EF1,EF2,EF3,EF4,EF5,EF6,EF7,EF8,EF9,EF10&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)),</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,3&quot;</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>testlet1_recode2 <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Testlet1_Recode2&quot;</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="st">&quot;EF11&quot;</span>, <span class="st">&quot;EF12&quot;</span>)),</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>),</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>                         <span class="st">&quot;EF1,EF2,EF3,EF4,EF5,EF6,EF7,EF8,EF9,EF10&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)),</span>
+<span id="cb11-14"><a href="#cb11-14" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
+<span id="cb11-15"><a href="#cb11-15" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,3&quot;</span></span>
+<span id="cb11-17"><a href="#cb11-17" tabindex="-1"></a>)</span></code></pre></div>
 <p>We can see in the new person-item map that this strategy did not work
 for any of the items. So we will try a new strategy at the next
 iteration.</p>
@@ -884,23 +890,23 @@ collapsed.</p>
 strategy is less straightforward and will likely have to be more
 extreme. At this iteration, we will try collapsing two sets of response
 options: we will collapse 1 with 2 and 3 with 4, as shown below.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>testlet1_recode3 <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Testlet1_Recode3&quot;</span>,</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="st">&quot;EF11&quot;</span>, <span class="st">&quot;EF12&quot;</span>)),</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>),</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;EF1,EF2,EF3,EF4,EF5,EF6,EF7,EF8,EF9,EF10&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)),</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,2&quot;</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>testlet1_recode3 <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Testlet1_Recode3&quot;</span>,</span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="st">&quot;EF11&quot;</span>, <span class="st">&quot;EF12&quot;</span>)),</span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>),</span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a>                         <span class="st">&quot;EF1,EF2,EF3,EF4,EF5,EF6,EF7,EF8,EF9,EF10&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>)),</span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else 0,1,1,2,2&quot;</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a>)</span></code></pre></div>
 <p>We can see with this recoding strategy that the thresholds are now
 ordered for most of the items! The only item it did not work for is
 <code>EF6</code>, which we will have to try a different strategy for at
@@ -927,24 +933,24 @@ infit and outfit statistics, so we will not recode it.</p>
 <p>Therefore at this iteration we will just try to solve the disordering
 of <code>EF6</code>. We will try collapsing the middle three response
 options, as shown below.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>testlet1_recode4 <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Testlet1_Recode4&quot;</span>,</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="st">&quot;EF11&quot;</span>, <span class="st">&quot;EF12&quot;</span>)),</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>),</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;EF1,EF2,EF3,EF4,EF5,EF7,EF8,EF9,EF10&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>),</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                         <span class="at">EF6 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>)),</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else except EF6 to 0,1,1,2,2, EF6 to 0,1,1,1,2&quot;</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>testlet1_recode4 <span class="ot">&lt;-</span> <span class="fu">rasch_mds</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="at">df =</span> df_adults, </span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="at">vars_metric =</span> <span class="fu">paste0</span>(<span class="st">&quot;EF&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="at">vars_id =</span> <span class="st">&quot;HHID&quot;</span>, </span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="at">vars_DIF =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age_cat&quot;</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="at">resp_opts =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, </span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  <span class="at">max_NA =</span> <span class="dv">2</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>  <span class="at">print_results =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>  <span class="at">path_parent =</span> <span class="st">&quot;/Users/lindsaylee/Desktop/&quot;</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>  <span class="at">model_name =</span> <span class="st">&quot;Testlet1_Recode4&quot;</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>  <span class="at">testlet_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="st">&quot;EF11&quot;</span>, <span class="st">&quot;EF12&quot;</span>)),</span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>  <span class="at">recode_strategy =</span> <span class="fu">list</span>(<span class="at">workschool =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>),</span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>                         <span class="st">&quot;EF1,EF2,EF3,EF4,EF5,EF7,EF8,EF9,EF10&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>),</span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>                         <span class="at">EF6 =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>)),</span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>  <span class="at">drop_vars =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>  <span class="at">split_strategy =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a>  <span class="at">comment =</span> <span class="st">&quot;Testlet: EF11,EF12 (LID&gt;0.25); Recode: workschool to 0,1,2,3,4,5,5,5,5, everything else except EF6 to 0,1,1,2,2, EF6 to 0,1,1,1,2&quot;</span></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>)</span></code></pre></div>
 <p>After running this model, we see the disordering for <code>EF6</code>
 has been resolved! All single items now have ordered thresholds!</p>
 <p><img src="data:image/png;base64,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" width="80%" style="display: block; margin: auto;" /></p>
