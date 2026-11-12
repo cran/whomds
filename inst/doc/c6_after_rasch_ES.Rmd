@@ -26,7 +26,7 @@ opts_chunk$set(warning=FALSE,
 
 # Unir puntajes con datos originales
 
-Una vez que haya terminado con Rasch Analysis, la puntuación se genera en el archivo `Data_final.csv` en la columna llamada `rescaled`. Este archivo solo contendrá los individuos incluidos en el análisis. Cualquier persona que tenga demasiados valores perdidos (`NA`) no estará en este archivo. A menudo es recomendable combinar los datos originales con todos los individuos con las nuevas puntuaciones. Cualquier persona que no haya calculado una puntuación tendrá un `NA` en esta columna.
+Una vez que haya terminado con Rasch Analysis, la puntuación se genera en el archivo `Data_final.csv` en la columna llamada `rescaled`. Este archivo solo contendrá los individuos incluidos en el análisis. Cualquier persona que tenga demasiados valores perdidos (`NA`) no estará en este archivo. A menudo es recomendable combinar los datos originales con todos los individuos con las nuevas puntuaciones. Cualquier persona que no haya calculado una puntuación tendrá un `NA` en esta columna. El archivo también contiene la estimación de la habilidad de la persona en su escala logit original (`person_pars`) y el error estándar de esa estimación (`person_pars_se`, en la misma escala logit), que puede ser útil conservar si planea reportar la incertidumbre de las puntuaciones individuales.
 
 Esta unión se puede lograr con el siguiente código. Primero, abre el paquete llamada `tidyverse` para acceder a las funciones necesarias. A continuación, lee el archivo `Data_final.csv` y selecciona solo las columnas que necesitas: `ID` (o cualquiera que sea el nombre de la columna de identificación individual en sus datos) y `rescaled`. El siguiente código asume que el archivo está en su directorio operativo. Tendrás que incluir la ruta completa al archivo si no está actualmente en su directorio operativo. Finalmente, puedes crear un objeto `merged_data` que fusione sus datos originales, aquí representados con el objeto `original_data`, con la nueva puntuación en una columna renombrada a `"DisabilityScore"` con el siguiente código:
 
@@ -40,6 +40,25 @@ merged_data <- original_data %>%
 ```
 
 Los datos de ejemplo incluidos en el paquete `whomds` llamado `df_adults` ya tienen una puntuación de Rasch combinada, en la columna `disability_score`.
+
+# Crear niveles de discapacidad
+
+La OMS suele presentar los resultados por nivel de discapacidad además de la puntuación continua. Los datos de ejemplo `df_adults` tienen una variable de este tipo, `disability_cat`, con cuatro niveles: No, Mild (leve), Moderate (moderada) y Severe (severa). La función `helper_disability_cat()` crea estos niveles a partir de una puntuación. Por defecto coloca los puntos de corte en la media menos una desviación estándar, la media y la media más una desviación estándar de la puntuación, de modo que los niveles se definen en relación con la población encuestada. Una puntuación exactamente igual a 0 siempre es "No". Así fue creada la variable `disability_cat` en `df_adults`:
+
+```{r disability-cat, eval=TRUE}
+disability_cat <- helper_disability_cat(df_adults$disability_score)
+table(disability_cat)
+attr(disability_cat, "cutoffs")
+```
+
+Los puntos de corte utilizados se guardan con el resultado, como se muestra arriba, para que puedan pasarse al argumento `cutoffs` de `fig_dist()` y `fig_density()` descritos más abajo. Si necesita que los niveles sean comparables con una encuesta anterior, pase los puntos de corte anteriores explícitamente con el argumento `cutoffs` en lugar de usar el valor por defecto.
+
+Para agregar los niveles a sus datos unidos, use `mutate()`:
+
+```{r disability-cat-mutate}
+merged_data <- merged_data %>% 
+  mutate(DisabilityCat = helper_disability_cat(DisabilityScore))
+```
 
 # Después de Rasch: análisis descriptivo
 

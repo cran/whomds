@@ -20,6 +20,45 @@ Copied from eRm::SepRel(), v1.0-1: This function calculates the proportion of pe
 }
 \details{
 See full documentation at \url{https://www.rdocumentation.org/packages/eRm/versions/1.0-1/topics/Separation\%20Reliability}
+
+\strong{Why whomds keeps its own copy.} From version 1.0-2,
+\code{eRm::SepRel()} excludes respondents who chose the lowest or the
+highest option for every item. This copy of the earlier version includes
+them, which gives a noticeably higher value in Model Disability Survey
+data, where many respondents report no problems at all. whomds keeps the
+earlier definition so that the \code{PSI} reported by \code{rasch_model()}
+stays comparable with earlier WHO analyses. Keep this in mind when comparing
+it with values from other software.
+}
+\examples{
+# rasch_mds() prepares the survey data before calling this function. To use
+# the function on its own, do the same preparation by hand:
+# 1. choose the items (survey questions) that will make up the scale
+items <- paste0("EF", 1:12)
+# 2. shift the responses 1 to 5 down to 0 to 4, as the Rasch Model expects
+df <- df_adults
+df[items] <- df[items] - 1
+# 3. make the ID column text, so that the artificial IDs "MIN" and "MAX" can
+#    be added to it later
+df$HHID <- as.character(df$HHID)
+# 4. record the highest possible value of each item (5, or 4 after the shift)
+max_values <- data.frame(var = items, max_val = 4)
+
+# rasch_mds() also removes people with too many missing answers, here more
+# than 2 of the 12 items. The model takes about 10 seconds on all 2500
+# adults, so this example uses only the first 300 who remain
+n_missing <- rowSums(is.na(df[items]))
+df <- df[n_missing <= 2, ]
+df <- df[1:300, ]
+
+\donttest{
+model <- rasch_model(df, items, vars_id = "HHID")
+
+# the person separation reliability of the model; this is the same value
+# that rasch_model() returns as PSI
+SepRel_1.0.1(model$person_parameters)
+model$PSI
+}
 }
 \references{
 Wright, B.D., and Stone, M.H. (1999). Measurement essentials. Wide Range Inc., Wilmington. (\url{https://www.rasch.org/measess/me-all.pdf} 28Mb).

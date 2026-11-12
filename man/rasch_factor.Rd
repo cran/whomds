@@ -31,23 +31,58 @@ Calculate a factor analysis for a Rasch Model
 \details{
 Unidimensionality of the data is one of the core assumptions of the Rasch Model. This function performs the factor analysis to assess the unidimensionality of the data.
 }
+\note{
+psych is listed in Depends rather than Imports on purpose. The bifactor
+  rotation in \code{psych::fa()} is carried out by \code{GPArotation::GPForth()},
+  which looks up the rotation criterion \code{vgQ.bimin} by name on the search
+  path. If psych is only loaded and not attached, that lookup fails and the
+  bifactor model is silently skipped. Tested with psych 2.6.9 and
+  GPArotation 2026.8.2.
+}
+\examples{
+# rasch_mds() prepares the survey data before calling this function. To use
+# the function on its own, do the same preparation by hand:
+# 1. choose the items (survey questions) that will make up the scale
+items <- paste0("EF", 1:12)
+# 2. shift the responses 1 to 5 down to 0 to 4, as the Rasch Model expects
+df <- df_adults
+df[items] <- df[items] - 1
+# 3. make the ID column text, so that the artificial IDs "MIN" and "MAX" can
+#    be added to it later
+df$HHID <- as.character(df$HHID)
+# 4. record the highest possible value of each item (5, or 4 after the shift)
+max_values <- data.frame(var = items, max_val = 4)
+
+# (warnings that a polychoric correlation "removed a row with zero marginal"
+# are expected here: few people answered EF12, so some of its response
+# options are never seen together with those of other items)
+factors <- rasch_factor(df, items)
+
+# the Rasch Model assumes the items measure one single thing (they are
+# "unidimensional"); the parallel analysis suggests how many factors there are
+factors$n_group_factors
+# a first eigenvalue much larger than the rest also points to one dimension
+round(factors$eigenvalues, 2)
+# the one-factor model shows how strongly each item relates to that factor
+factors$fa_onefactor$loadings
+}
 \seealso{
-Other rasch functions: 
-\code{\link{rasch_DIF}()},
-\code{\link{rasch_df_nest}()},
-\code{\link{rasch_drop}()},
-\code{\link{rasch_mds_children}()},
-\code{\link{rasch_mds}()},
-\code{\link{rasch_model_children}()},
-\code{\link{rasch_model}()},
-\code{\link{rasch_quality_children_print}()},
-\code{\link{rasch_quality_children}()},
-\code{\link{rasch_rawscore}()},
-\code{\link{rasch_recode}()},
-\code{\link{rasch_rescale_children}()},
-\code{\link{rasch_rescale}()},
-\code{\link{rasch_split_age}()},
-\code{\link{rasch_split}()},
-\code{\link{rasch_testlet}()}
+Other rasch functions:
+\code{\link[=rasch_DIF]{rasch_DIF()}},
+\code{\link[=rasch_df_nest]{rasch_df_nest()}},
+\code{\link[=rasch_drop]{rasch_drop()}},
+\code{\link[=rasch_mds]{rasch_mds()}},
+\code{\link[=rasch_mds_children]{rasch_mds_children()}},
+\code{\link[=rasch_model]{rasch_model()}},
+\code{\link[=rasch_model_children]{rasch_model_children()}},
+\code{\link[=rasch_quality_children]{rasch_quality_children()}},
+\code{\link[=rasch_quality_children_print]{rasch_quality_children_print()}},
+\code{\link[=rasch_rawscore]{rasch_rawscore()}},
+\code{\link[=rasch_recode]{rasch_recode()}},
+\code{\link[=rasch_rescale]{rasch_rescale()}},
+\code{\link[=rasch_rescale_children]{rasch_rescale_children()}},
+\code{\link[=rasch_split]{rasch_split()}},
+\code{\link[=rasch_split_age]{rasch_split_age()}},
+\code{\link[=rasch_testlet]{rasch_testlet()}}
 }
 \concept{rasch functions}

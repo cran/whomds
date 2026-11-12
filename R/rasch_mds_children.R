@@ -13,13 +13,49 @@
 #' 
 #' Often Rasch Analysis of children data is more difficult because of the extreme skewness of the responses. For this reason, it is often advisable to build a scale only with the respondents on the more severe end of the disability continuum. By specifying \code{has_at_least_one}, the function will remove all children from the sample who do endorse an answer of any of \code{has_at_least_one} in at least one \code{vars_metric}. The scores created can be reunited with the excluded children post-hoc.
 #' 
-#' @return a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled}). 
+#' @return a tibble with new columns representing the original person abilities (\code{person_pars}), their standard errors (\code{person_pars_se}, on the same logit scale) and the rescaled person abilities (\code{rescaled}). 
 #' 
 #' If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model. 
 #' 
 #' @family rasch functions
 #' @family children analysis functions
 #' 
+#' @examples
+#' \donttest{
+#' # One iteration of Rasch Analysis on the example children data. Ten items
+#' # were asked of every child and the others only of certain age groups, so
+#' # the items are given in two parts. Only children with at least one answer
+#' # of 4 or 5 are used (has_at_least_one), which is usual for children data.
+#' # No files are saved because print_results is FALSE
+#' start <- rasch_mds_children(
+#'   df = df_children,
+#'   vars_id = "HHID",
+#'   vars_group = "age_cat",
+#'   vars_metric_common = paste0("child", 1:10),
+#'   vars_metric_grouped = list(
+#'     Age2to4   = paste0("child", c(12, 15, 16, 19, 20, 24, 25)),
+#'     Age5to9   = paste0("child", c(11, 13, 14, 17, 18, 20, 21, 22, 23, 24, 25, 27)),
+#'     Age10to17 = paste0("child", c(11, 13, 14, 17, 18, 20, 21, 22, 23, 25, 26, 27))
+#'   ),
+#'   TAM_model = "PCM2",
+#'   resp_opts = 1:5,
+#'   has_at_least_one = 4:5,
+#'   max_NA = 10,
+#'   print_results = FALSE
+#' )
+#'
+#' # the data with each child's ability ("person_pars"), its standard error and
+#' # the ability rescaled to a 0 to 100 disability score
+#' head(start$df[c("HHID", "age_cat", "person_pars", "person_pars_se", "rescaled")])
+#' # the items used for each age group; items asked of more than one group
+#' # have been split into one item per group
+#' start$vars_metric
+#'
+#' # To save plots and spreadsheets of the results on your computer, add
+#' # print_results = TRUE, path_parent = "/Users/yourname/Desktop/" (a folder
+#' # that already exists, ending in "/") and model_name = "Start", as in the
+#' # example for rasch_mds()
+#' }
 #' @export
 #' 
 #' @import dplyr
@@ -99,7 +135,7 @@ rasch_mds_children <- function(df,
   
   df <- df %>%
     mutate_at(vars(all_of(helper_varslist(vars_metric))),
-              list(~ plyr::mapvalues(., 
+              list(~ helper_mapvalues(., 
                                      from = to_NA, 
                                      to = rep(NA, length(to_NA)), 
                                      warn_missing = FALSE)
@@ -231,12 +267,12 @@ rasch_mds_children <- function(df,
   # PRINT RESPONSE FREQUENCIES -------
   if (print_results) {
     df %>% 
-      select(helper_varslist(vars_metric)) %>% 
+      select(all_of(helper_varslist(vars_metric))) %>% 
       purrr::map(~ table(resp = ., useNA = "always")) %>% 
       purrr::map(~ as_tibble(.)) %>% 
       bind_rows(.id = "Q") %>% 
       tidyr::pivot_wider(names_from = Q, values_from = n) %>% 
-      readr::write_csv(paste0(path_output, "/response_freq.csv"))
+      utils::write.csv(paste0(path_output, "/response_freq.csv"), row.names = FALSE)
     
   }
   
@@ -293,7 +329,7 @@ rasch_mds_children <- function(df,
                                      vars_id = vars_id)
   
   # PRINT DATA ---------
-  if (print_results) df_final %>% readr::write_csv(file = paste0(path_output, "/Data_final.csv"))
+  if (print_results) df_final %>% utils::write.csv(file = paste0(path_output, "/Data_final.csv"), row.names = FALSE)
   
   
   # RETURN DATA WITH SCORE ----------

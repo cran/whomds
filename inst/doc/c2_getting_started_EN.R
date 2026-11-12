@@ -11,8 +11,8 @@ opts_chunk$set(warning=FALSE,
 
 
 ## ----install-cran-------------------------------------------------------------
-#  install.packages("whomds")
+# install.packages("whomds")
 
 ## ----open-whomds--------------------------------------------------------------
-#  library(whomds)
+# library(whomds)
 

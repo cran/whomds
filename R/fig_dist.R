@@ -27,6 +27,11 @@
 #' cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 2000)
 #' fig_dist(df_adults, score = "disability_score", score_cat = "disability_cat", 
 #' cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 0.2, pcent=TRUE)
+#' 
+#' # derive the categories and their cut-offs from the score with helper_disability_cat()
+#' df_cat <- dplyr::mutate(df_adults, disability_cat = helper_disability_cat(disability_score))
+#' fig_dist(df_cat, score = "disability_score", score_cat = "disability_cat", 
+#' cutoffs = attr(df_cat$disability_cat, "cutoffs"), x_lab = "Disability score")
 fig_dist <- function(df, score, score_cat, cutoffs,
                         x_lab = "Score", y_max = NULL, pcent=FALSE, pal = "Blues", binwidth = 5){
   
@@ -35,16 +40,16 @@ fig_dist <- function(df, score, score_cat, cutoffs,
   
   if (pcent) {
     y_lab <- "Percent"
-    type <- "..count../sum(..count..)"
+    y_mapping <- aes(y = after_stat(count / sum(count)))
     
     # default y-axis values to try
     possible_scale <- c(0.01,0.05,0.1,0.2,0.25)
     final_scale <- 0.05
-    lab <- scales::percent_format()
+    lab <- function(x) ifelse(is.na(x), NA_character_, paste0(format(x * 100, trim = TRUE, drop0trailing = TRUE), "%"))
     
   } else {
     y_lab <- "Frequency"
-    type <- "..count.."
+    y_mapping <- aes(y = after_stat(count))
 
     # default y-axis values to try
     possible_scale <- c(200,250,300,500,1000)
@@ -57,13 +62,13 @@ fig_dist <- function(df, score, score_cat, cutoffs,
 
   
   #Begin plot
-  plot_dist <- ggplot(df, aes_string(x = score, fill = score_cat)) +
-    geom_histogram(position = "identity", binwidth = binwidth, aes_string(y=type), col="black") +
+  plot_dist <- ggplot(df, aes(x = .data[[score]], fill = .data[[score_cat]])) +
+    geom_histogram(position = "identity", binwidth = binwidth, mapping = y_mapping, col="black") +
     scale_fill_manual(values = fill_colors, drop=FALSE)  +
     scale_x_continuous(breaks = seq(0, 100, by = 10), limits = c(min(-2.5,min(cutoffs)),102.5)) +
     # scale_y_continuous(breaks = seq(0, y_max, by = final_scale), limits=c(NA,y_max), labels=lab) +
     labs(x = x_lab, y = y_lab) +
-    geom_vline(xintercept = cutoffs, color="black", linetype="dashed", size=1) +
+    geom_vline(xintercept = cutoffs, color="black", linetype="dashed", linewidth = 1) +
     theme(plot.margin = unit(c(1, 1, 3, 1), "lines"),
           legend.title=element_blank(),
           panel.grid.minor = element_blank(),

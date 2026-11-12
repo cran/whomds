@@ -63,7 +63,7 @@ rasch_mds_children(
 \item{comment}{a string giving a comment describing the analysis, printed to a txt file. Default is NULL, to not print a comment.}
 }
 \value{
-a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled}). 
+a tibble with new columns representing the original person abilities (\code{person_pars}), their standard errors (\code{person_pars_se}, on the same logit scale) and the rescaled person abilities (\code{rescaled}). 
 
 If \code{print_results} is TRUE, prints files to the working directory with the results of the Rasch Model.
 }
@@ -75,36 +75,73 @@ This function combines all of the separate analyses of model fit necessary to as
 
 Often Rasch Analysis of children data is more difficult because of the extreme skewness of the responses. For this reason, it is often advisable to build a scale only with the respondents on the more severe end of the disability continuum. By specifying \code{has_at_least_one}, the function will remove all children from the sample who do endorse an answer of any of \code{has_at_least_one} in at least one \code{vars_metric}. The scores created can be reunited with the excluded children post-hoc.
 }
-\seealso{
-Other rasch functions: 
-\code{\link{rasch_DIF}()},
-\code{\link{rasch_df_nest}()},
-\code{\link{rasch_drop}()},
-\code{\link{rasch_factor}()},
-\code{\link{rasch_mds}()},
-\code{\link{rasch_model_children}()},
-\code{\link{rasch_model}()},
-\code{\link{rasch_quality_children_print}()},
-\code{\link{rasch_quality_children}()},
-\code{\link{rasch_rawscore}()},
-\code{\link{rasch_recode}()},
-\code{\link{rasch_rescale_children}()},
-\code{\link{rasch_rescale}()},
-\code{\link{rasch_split_age}()},
-\code{\link{rasch_split}()},
-\code{\link{rasch_testlet}()}
+\examples{
+\donttest{
+# One iteration of Rasch Analysis on the example children data. Ten items
+# were asked of every child and the others only of certain age groups, so
+# the items are given in two parts. Only children with at least one answer
+# of 4 or 5 are used (has_at_least_one), which is usual for children data.
+# No files are saved because print_results is FALSE
+start <- rasch_mds_children(
+  df = df_children,
+  vars_id = "HHID",
+  vars_group = "age_cat",
+  vars_metric_common = paste0("child", 1:10),
+  vars_metric_grouped = list(
+    Age2to4   = paste0("child", c(12, 15, 16, 19, 20, 24, 25)),
+    Age5to9   = paste0("child", c(11, 13, 14, 17, 18, 20, 21, 22, 23, 24, 25, 27)),
+    Age10to17 = paste0("child", c(11, 13, 14, 17, 18, 20, 21, 22, 23, 25, 26, 27))
+  ),
+  TAM_model = "PCM2",
+  resp_opts = 1:5,
+  has_at_least_one = 4:5,
+  max_NA = 10,
+  print_results = FALSE
+)
 
-Other children analysis functions: 
-\code{\link{rasch_df_nest}()},
-\code{\link{rasch_drop}()},
-\code{\link{rasch_model_children}()},
-\code{\link{rasch_quality_children_print}()},
-\code{\link{rasch_quality_children}()},
-\code{\link{rasch_recode}()},
-\code{\link{rasch_rescale_children}()},
-\code{\link{rasch_split_age}()},
-\code{\link{rasch_split}()},
-\code{\link{rasch_testlet}()}
+# the data with each child's ability ("person_pars"), its standard error and
+# the ability rescaled to a 0 to 100 disability score
+head(start$df[c("HHID", "age_cat", "person_pars", "person_pars_se", "rescaled")])
+# the items used for each age group; items asked of more than one group
+# have been split into one item per group
+start$vars_metric
+
+# To save plots and spreadsheets of the results on your computer, add
+# print_results = TRUE, path_parent = "/Users/yourname/Desktop/" (a folder
+# that already exists, ending in "/") and model_name = "Start", as in the
+# example for rasch_mds()
+}
+}
+\seealso{
+Other rasch functions:
+\code{\link[=rasch_DIF]{rasch_DIF()}},
+\code{\link[=rasch_df_nest]{rasch_df_nest()}},
+\code{\link[=rasch_drop]{rasch_drop()}},
+\code{\link[=rasch_factor]{rasch_factor()}},
+\code{\link[=rasch_mds]{rasch_mds()}},
+\code{\link[=rasch_model]{rasch_model()}},
+\code{\link[=rasch_model_children]{rasch_model_children()}},
+\code{\link[=rasch_quality_children]{rasch_quality_children()}},
+\code{\link[=rasch_quality_children_print]{rasch_quality_children_print()}},
+\code{\link[=rasch_rawscore]{rasch_rawscore()}},
+\code{\link[=rasch_recode]{rasch_recode()}},
+\code{\link[=rasch_rescale]{rasch_rescale()}},
+\code{\link[=rasch_rescale_children]{rasch_rescale_children()}},
+\code{\link[=rasch_split]{rasch_split()}},
+\code{\link[=rasch_split_age]{rasch_split_age()}},
+\code{\link[=rasch_testlet]{rasch_testlet()}}
+
+Other children analysis functions:
+\code{\link[=rasch_df_nest]{rasch_df_nest()}},
+\code{\link[=rasch_drop]{rasch_drop()}},
+\code{\link[=rasch_model_children]{rasch_model_children()}},
+\code{\link[=rasch_quality_children]{rasch_quality_children()}},
+\code{\link[=rasch_quality_children_print]{rasch_quality_children_print()}},
+\code{\link[=rasch_recode]{rasch_recode()}},
+\code{\link[=rasch_rescale_children]{rasch_rescale_children()}},
+\code{\link[=rasch_split]{rasch_split()}},
+\code{\link[=rasch_split_age]{rasch_split_age()}},
+\code{\link[=rasch_testlet]{rasch_testlet()}}
 }
 \concept{children analysis functions}
 \concept{rasch functions}

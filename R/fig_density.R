@@ -8,7 +8,7 @@
 #' @param x_lab a string (length 1) of x-axis label. Default is "Score".
 #' @param pal a string specifying either a manual color to use for the color aesthetic, a character vector explictly specifying the colors to use for the color scale, or as the name of a palette to pass to \code{RColorBrewer::brewer.pal()} with the name of the color palette to use for the color scale. Default is \code{"Paired"}
 #' @param adjust a numeric value to pass to \code{adjust} argument of \code{ggplot2::geom_density()}. Default is 2.
-#' @param size a numeric value to pass to \code{size} argument of \code{ggplot2::geom_density()}. Default is 1.5.
+#' @param size a numeric value for the width of the density lines, passed to the \code{linewidth} argument of \code{ggplot2::geom_density()}. Default is 1.5.
 #' 
 #' @return A density figure
 #' 
@@ -27,6 +27,11 @@
 #' cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
 #' fig_density(df_adults, score = "disability_score", var_color = "sex", 
 #' var_facet = "age_cat",  cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
+#' 
+#' # derive the cut-offs from the score with helper_disability_cat()
+#' cutoffs_derived <- attr(helper_disability_cat(df_adults$disability_score), "cutoffs")
+#' fig_density(df_adults, score = "disability_score", cutoffs = cutoffs_derived, 
+#' x_lab = "Disability score")
 fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
                         cutoffs = NULL, x_lab = "Score", 
                         pal = "Paired", adjust = 2, size = 1.5){
@@ -52,17 +57,17 @@ fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
     if (pal %in% rownames(RColorBrewer::brewer.pal.info)) {
       #if length == 1 and pal in palettes -> brewer scale
       plot_density <- plot_density +
-        geom_density(adjust = adjust, size = size) +
+        geom_density(adjust = adjust, linewidth = size) +
         scale_color_brewer(palette = pal)
     } else {
       #if length == 1 and pal not in palettes -> color aesthetic
       plot_density <- plot_density +
-        geom_density(adjust = adjust, size = size, color = pal)
+        geom_density(adjust = adjust, linewidth = size, color = pal)
     }
   } else {
     #if length != 1 -> manual color scale
     plot_density <- plot_density +
-      geom_density(adjust = adjust, size = size) +
+      geom_density(adjust = adjust, linewidth = size) +
       scale_color_manual(values = pal)
   }
   
@@ -71,7 +76,7 @@ fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
   
   #Continue plot with formatting
   plot_density <- plot_density + 
-    scale_x_continuous(limits = c(min(0, min(cutoffs)), 100)) +
+    scale_x_continuous(limits = c(min(c(0, cutoffs)), 100)) +
     labs(x = x_lab) +
     theme(
       panel.background = element_rect(fill = "transparent"), # bg of the panel
@@ -99,7 +104,7 @@ fig_density <- function(df, score, var_color = NULL, var_facet = NULL,
   #add cutoffs lines if non-NULL
   if (!is.null(cutoffs)) {
     plot_density <- plot_density + 
-      geom_vline(xintercept = cutoffs, color="black", linetype="dashed", size=.5)
+      geom_vline(xintercept = cutoffs, color="black", linetype="dashed", linewidth = .5)
   }
   
   #add facet grid if var_facet non-NULL

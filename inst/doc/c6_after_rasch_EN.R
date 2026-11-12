@@ -16,12 +16,21 @@ opts_chunk$set(warning=FALSE,
 
 
 ## ----join-example-------------------------------------------------------------
-#  library(tidyverse)
-#  new_score <- read_csv("Data_final.csv") %>%
-#    select(c("ID", "rescaled"))
-#  merged_data <- original_data %>%
-#    left_join(new_score) %>%
-#    rename("DisabilityScore" = "rescaled")
+# library(tidyverse)
+# new_score <- read_csv("Data_final.csv") %>%
+#   select(c("ID", "rescaled"))
+# merged_data <- original_data %>%
+#   left_join(new_score) %>%
+#   rename("DisabilityScore" = "rescaled")
+
+## ----disability-cat, eval=TRUE------------------------------------------------
+disability_cat <- helper_disability_cat(df_adults$disability_score)
+table(disability_cat)
+attr(disability_cat, "cutoffs")
+
+## ----disability-cat-mutate----------------------------------------------------
+# merged_data <- merged_data %>%
+#   mutate(DisabilityCat = helper_disability_cat(DisabilityScore))
 
 ## ----table-weightedpct-example1, eval=TRUE------------------------------------
 #Remove NAs from column used for argument by_vars

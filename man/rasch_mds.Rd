@@ -52,7 +52,7 @@ rasch_mds(
 }
 \value{
 a named list with:
-\item{df}{a tibble with new columns representing the original person abilities (\code{person_pars}) and the rescaled person abilities (\code{rescaled})} 
+\item{df}{a tibble with new columns representing the original person abilities (\code{person_pars}), their standard errors (\code{person_pars_se}, on the same logit scale) and the rescaled person abilities (\code{rescaled})} 
 \item{vars_metric}{a character vector with the variables used in the metric after all adjustments}
 \item{df_results}{a tibble of one row with key results of the model}
 
@@ -64,23 +64,65 @@ Top-level function to perform Rasch Analysis on WHO Model Disability Survey data
 \details{
 This function combines all of the separate analyses of model fit necessary to assess the quality of the Rasch Model. It is designed to require minimal intervention from the user. Users wishing to have more control over the analysis can use the other Rasch functions in this package separately.
 }
+\examples{
+\donttest{
+# One iteration of Rasch Analysis on the 12 environmental factor items of
+# the example adult data, checking for differential item functioning (DIF)
+# by sex and age group. This takes about 15 seconds. No files are saved
+# because print_results is FALSE
+start <- rasch_mds(
+  df = df_adults,
+  vars_metric = paste0("EF", 1:12),
+  vars_id = "HHID",
+  vars_DIF = c("sex", "age_cat"),
+  resp_opts = 1:5,
+  max_NA = 2,
+  print_results = FALSE
+)
+
+# the data with each person's ability ("person_pars"), its standard error
+# and the ability rescaled to a 0 to 100 disability score
+head(start$df[c("HHID", "person_pars", "person_pars_se", "rescaled")])
+# a one-row summary of how well the data fit the model
+start$df_results
+}
+
+\dontrun{
+# To save the full set of results (plots, spreadsheets and the scored data)
+# on your computer, set print_results to TRUE and give a folder that already
+# exists, ending in "/". A new folder named after model_name is created
+# inside it. On Windows the path looks like "C:/Users/yourname/Desktop/"
+start <- rasch_mds(
+  df = df_adults,
+  vars_metric = paste0("EF", 1:12),
+  vars_id = "HHID",
+  vars_DIF = c("sex", "age_cat"),
+  resp_opts = 1:5,
+  max_NA = 2,
+  print_results = TRUE,
+  path_parent = "/Users/yourname/Desktop/",
+  model_name = "Start",
+  comment = "Initial run with all 12 items"
+)
+}
+}
 \seealso{
-Other rasch functions: 
-\code{\link{rasch_DIF}()},
-\code{\link{rasch_df_nest}()},
-\code{\link{rasch_drop}()},
-\code{\link{rasch_factor}()},
-\code{\link{rasch_mds_children}()},
-\code{\link{rasch_model_children}()},
-\code{\link{rasch_model}()},
-\code{\link{rasch_quality_children_print}()},
-\code{\link{rasch_quality_children}()},
-\code{\link{rasch_rawscore}()},
-\code{\link{rasch_recode}()},
-\code{\link{rasch_rescale_children}()},
-\code{\link{rasch_rescale}()},
-\code{\link{rasch_split_age}()},
-\code{\link{rasch_split}()},
-\code{\link{rasch_testlet}()}
+Other rasch functions:
+\code{\link[=rasch_DIF]{rasch_DIF()}},
+\code{\link[=rasch_df_nest]{rasch_df_nest()}},
+\code{\link[=rasch_drop]{rasch_drop()}},
+\code{\link[=rasch_factor]{rasch_factor()}},
+\code{\link[=rasch_mds_children]{rasch_mds_children()}},
+\code{\link[=rasch_model]{rasch_model()}},
+\code{\link[=rasch_model_children]{rasch_model_children()}},
+\code{\link[=rasch_quality_children]{rasch_quality_children()}},
+\code{\link[=rasch_quality_children_print]{rasch_quality_children_print()}},
+\code{\link[=rasch_rawscore]{rasch_rawscore()}},
+\code{\link[=rasch_recode]{rasch_recode()}},
+\code{\link[=rasch_rescale]{rasch_rescale()}},
+\code{\link[=rasch_rescale_children]{rasch_rescale_children()}},
+\code{\link[=rasch_split]{rasch_split()}},
+\code{\link[=rasch_split_age]{rasch_split_age()}},
+\code{\link[=rasch_testlet]{rasch_testlet()}}
 }
 \concept{rasch functions}

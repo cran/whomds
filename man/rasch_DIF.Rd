@@ -47,23 +47,58 @@ Differential Item Functioning (DIF) refers to the circumstance when different gr
 \note{
 Currently the calculation of the class intervals is quite slow. Reducing the number of breaks can improve speed.
 }
+\examples{
+# rasch_mds() prepares the survey data before calling this function. To use
+# the function on its own, do the same preparation by hand:
+# 1. choose the items (survey questions) that will make up the scale
+items <- paste0("EF", 1:12)
+# 2. shift the responses 1 to 5 down to 0 to 4, as the Rasch Model expects
+df <- df_adults
+df[items] <- df[items] - 1
+# 3. make the ID column text, so that the artificial IDs "MIN" and "MAX" can
+#    be added to it later
+df$HHID <- as.character(df$HHID)
+# 4. record the highest possible value of each item (5, or 4 after the shift)
+max_values <- data.frame(var = items, max_val = 4)
+
+# rasch_mds() also removes people with too many missing answers, here more
+# than 2 of the 12 items. The model takes about 10 seconds on all 2500
+# adults, so this example uses only the first 300 who remain
+n_missing <- rowSums(is.na(df[items]))
+df <- df[n_missing <= 2, ]
+df <- df[1:300, ]
+
+\donttest{
+# DIF analysis needs the person residuals from the Rasch Model
+model <- rasch_model(df, items, vars_id = "HHID")
+
+dif <- rasch_DIF(df, items, vars_DIF = c("sex", "age_cat"),
+  residuals_PCM = model$residuals_PCM)
+
+# items whose responses differ by sex or age group, after accounting for
+# the person's overall level of disability (empty when there is no DIF)
+dif$DIF_results
+# the ANOVA table behind that conclusion, one block per item and variable
+head(dif$tab_aov_DIF)
+}
+}
 \seealso{
-Other rasch functions: 
-\code{\link{rasch_df_nest}()},
-\code{\link{rasch_drop}()},
-\code{\link{rasch_factor}()},
-\code{\link{rasch_mds_children}()},
-\code{\link{rasch_mds}()},
-\code{\link{rasch_model_children}()},
-\code{\link{rasch_model}()},
-\code{\link{rasch_quality_children_print}()},
-\code{\link{rasch_quality_children}()},
-\code{\link{rasch_rawscore}()},
-\code{\link{rasch_recode}()},
-\code{\link{rasch_rescale_children}()},
-\code{\link{rasch_rescale}()},
-\code{\link{rasch_split_age}()},
-\code{\link{rasch_split}()},
-\code{\link{rasch_testlet}()}
+Other rasch functions:
+\code{\link[=rasch_df_nest]{rasch_df_nest()}},
+\code{\link[=rasch_drop]{rasch_drop()}},
+\code{\link[=rasch_factor]{rasch_factor()}},
+\code{\link[=rasch_mds]{rasch_mds()}},
+\code{\link[=rasch_mds_children]{rasch_mds_children()}},
+\code{\link[=rasch_model]{rasch_model()}},
+\code{\link[=rasch_model_children]{rasch_model_children()}},
+\code{\link[=rasch_quality_children]{rasch_quality_children()}},
+\code{\link[=rasch_quality_children_print]{rasch_quality_children_print()}},
+\code{\link[=rasch_rawscore]{rasch_rawscore()}},
+\code{\link[=rasch_recode]{rasch_recode()}},
+\code{\link[=rasch_rescale]{rasch_rescale()}},
+\code{\link[=rasch_rescale_children]{rasch_rescale_children()}},
+\code{\link[=rasch_split]{rasch_split()}},
+\code{\link[=rasch_split_age]{rasch_split_age()}},
+\code{\link[=rasch_testlet]{rasch_testlet()}}
 }
 \concept{rasch functions}

@@ -8,6 +8,16 @@
 #' \item{df}{new \code{df} after splitting the variables}
 #' \item{vars_metric}{new \code{vars_metric} after splitting the variables}
 #' \item{max_values}{new \code{max_values} after splitting the variables}
+#' @example inst/examples/prep_children.R
+#' @examples
+#'
+#' split <- rasch_split_age(df, vars_group = "age_cat", vars_metric = vars_metric,
+#'   vars_id = "HHID", max_values = max_values)
+#'
+#' # items asked of more than one age group (child11 is asked of ages 5 to 17)
+#' # are split into one item per age group, so each can have its own difficulty
+#' split$vars_metric$Age5to9
+#' head(split$df[c("age_cat", "child11", "child11_Age5to9", "child11_Age10to17")])
 #' @export
 #' 
 #' @family rasch functions
@@ -42,12 +52,12 @@ rasch_split_age <- function (df, vars_group, vars_metric, vars_id, max_values) {
       
       #select vars needed
       subtbl <- df %>% 
-        select(vars_id, vars_group, var)
+        select(all_of(c(vars_id, vars_group, var)))
       
       #pivot variables to create three discrete variables
       subtbl_pivot <- subtbl %>% 
-        tidyr::pivot_wider(names_from = !!quo(vars_group), values_from = !!quo(var)) %>%
-        rename_at(vars(levels_age_group), list(~ paste0(var,"_",.)))
+        tidyr::pivot_wider(names_from = all_of(vars_group), values_from = all_of(var)) %>%
+        rename_at(vars(all_of(levels_age_group)), list(~ paste0(var,"_",.)))
       
       #give error if number of rows isn't maintained
       if (nrow(subtbl_pivot) != nrow(df)) stop(paste0("Pivoted table for ", var, " has nrow that doesn't match nrow(df). Check what's going on."))

@@ -27,7 +27,7 @@ opts_chunk$set(warning=FALSE,
 
 # Joining scores with original data
 
-After you have finished with Rasch Analysis, the score is outputted in the file `Data_final.csv` in the column called `rescaled`. This file will only contain the individuals included in the analysis. Any individual who had too many missing values (`NA`) will not be in this file. It is often advisable to merge the original data with all individuals with the new scores. Any individual who did not have a score calculated will have an `NA` in this column.
+After you have finished with Rasch Analysis, the score is outputted in the file `Data_final.csv` in the column called `rescaled`. This file will only contain the individuals included in the analysis. Any individual who had too many missing values (`NA`) will not be in this file. It is often advisable to merge the original data with all individuals with the new scores. Any individual who did not have a score calculated will have an `NA` in this column. The file also contains the person ability estimate on its original logit scale (`person_pars`) and the standard error of that estimate (`person_pars_se`, on the same logit scale), which you may want to keep if you plan to report uncertainty around individual scores.
 
 This merge can be accomplished with the following code. First, open the library called `tidyverse` to access the necessary functions. Next, read in the `Data_final.csv` file and select only the columns you need: `ID` (or whatever the name of the individual ID column is in your data) and `rescaled`. The code below assumes that the file is in your working directory. You will have to include the full path to the file if it is not currently in your working directory. Finally, you can create an object `merged_data` that merges your original data, here represented with the object `original_data`, with the new score in a column renamed to `"DisabilityScore"` with the following code:
 
@@ -41,6 +41,25 @@ merged_data <- original_data %>%
 ```
 
 The sample data included in the `whomds` package called `df_adults` already has a Rasch score merged with it, in the column `disability_score`.
+
+# Creating disability levels
+
+WHO often reports results by level of disability in addition to the continuous score. The sample data `df_adults` has such a variable, `disability_cat`, with four levels: No, Mild, Moderate and Severe. The function `helper_disability_cat()` creates these levels from a score. By default it places the cut-offs at the mean minus one standard deviation, the mean, and the mean plus one standard deviation of the score, so the levels are defined relative to the population surveyed. A score of exactly 0 is always "No". This is how `disability_cat` in `df_adults` was created:
+
+```{r disability-cat, eval=TRUE}
+disability_cat <- helper_disability_cat(df_adults$disability_score)
+table(disability_cat)
+attr(disability_cat, "cutoffs")
+```
+
+The cut-offs used are stored with the result, as shown above, so they can be passed to the `cutoffs` argument of `fig_dist()` and `fig_density()` described below. If you need the levels to be comparable with a previous survey, pass the earlier cut-offs explicitly with the `cutoffs` argument instead of using the default.
+
+To add the levels to your merged data, use `mutate()`:
+
+```{r disability-cat-mutate}
+merged_data <- merged_data %>% 
+  mutate(DisabilityCat = helper_disability_cat(DisabilityScore))
+```
 
 # Descriptive analysis 
 

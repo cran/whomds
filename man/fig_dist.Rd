@@ -51,11 +51,16 @@ fig_dist(df_adults, score = "disability_score", score_cat = "disability_cat",
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 2000)
 fig_dist(df_adults, score = "disability_score", score_cat = "disability_cat", 
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score", y_max = 0.2, pcent=TRUE)
+
+# derive the categories and their cut-offs from the score with helper_disability_cat()
+df_cat <- dplyr::mutate(df_adults, disability_cat = helper_disability_cat(disability_score))
+fig_dist(df_cat, score = "disability_score", score_cat = "disability_cat", 
+cutoffs = attr(df_cat$disability_cat, "cutoffs"), x_lab = "Disability score")
 }
 \seealso{
-Other figure functions: 
-\code{\link{fig_LID}()},
-\code{\link{fig_density}()},
-\code{\link{fig_poppyramid}()}
+Other figure functions:
+\code{\link[=fig_LID]{fig_LID()}},
+\code{\link[=fig_density]{fig_density()}},
+\code{\link[=fig_poppyramid]{fig_poppyramid()}}
 }
 \concept{figure functions}

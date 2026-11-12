@@ -30,8 +30,9 @@ Check a vector for particular values
 If all values of \code{row} are NA, then an NA is returned.
 }
 \seealso{
-Other helper functions: 
-\code{\link{helper_palette}()},
-\code{\link{helper_varslist}()}
+Other helper functions:
+\code{\link[=helper_disability_cat]{helper_disability_cat()}},
+\code{\link[=helper_palette]{helper_palette()}},
+\code{\link[=helper_varslist]{helper_varslist()}}
 }
 \concept{helper functions}

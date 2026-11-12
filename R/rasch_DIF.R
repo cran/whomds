@@ -14,6 +14,23 @@
 #' 
 #' @family rasch functions
 #' 
+#' @example inst/examples/prep_adults.R
+#' @example inst/examples/prep_adults_model.R
+#' @examples
+#'
+#' \donttest{
+#' # DIF analysis needs the person residuals from the Rasch Model
+#' model <- rasch_model(df, items, vars_id = "HHID")
+#'
+#' dif <- rasch_DIF(df, items, vars_DIF = c("sex", "age_cat"),
+#'   residuals_PCM = model$residuals_PCM)
+#'
+#' # items whose responses differ by sex or age group, after accounting for
+#' # the person's overall level of disability (empty when there is no DIF)
+#' dif$DIF_results
+#' # the ANOVA table behind that conclusion, one block per item and variable
+#' head(dif$tab_aov_DIF)
+#' }
 #' @export
 #' @import dplyr
 #' 
@@ -25,23 +42,23 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   
   #save data frame for DIF
   df_DIF <- df %>% 
-    select(c(vars_metric,vars_DIF))
+    select(all_of(c(vars_metric, vars_DIF)))
   
   df_metric <- df_DIF %>% 
-    select(vars_metric)
+    select(all_of(vars_metric))
   
   
   ### "DIF analysis bases on the residuals
   residuals_PCM <- residuals_PCM %>% 
     as.data.frame() %>%
     tibble::rownames_to_column("person") %>% 
-    rename_at(vars(vars_metric), list(~ paste0(.,"_Res")))
+    rename_at(vars(all_of(vars_metric)), list(~ paste0(.,"_Res")))
   
   vars_metric_res <- colnames(residuals_PCM)[-1] #list of names of variable residuals
   
   rows <- residuals_PCM %>% 
     pull(person) %>% 
-    stringr::str_extract_all("[:digit:]+") %>% 
+    regmatches(., gregexpr("[[:digit:]]+", .)) %>% 
     unlist() %>% 
     as.numeric()
   
@@ -69,7 +86,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   Mat <- rows_sums_quantile[-1] %>% 
     tibble() %>% 
     t() %>% 
-    as_tibble() %>% 
+    as_tibble(.name_repair = ~ paste0("V", seq_along(.x))) %>% 
     slice(rep(1,nrow(Grid)))
   
   Intervals <- purrr::map2_dfc(Grid, Mat, ~paste0(..1, ..2))
@@ -77,7 +94,7 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   Dmat <- df_metric_rows_sums %>% 
     tibble() %>% 
     t() %>% 
-    as_tibble() %>% 
+    as_tibble(.name_repair = ~ paste0("V", seq_along(.x))) %>% 
     slice(rep(1,nrow(Grid)))
   
   
@@ -95,7 +112,9 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   
   names(what) <- paste0("v",1:length(what))
   
-  sol <- bind_cols(what) %>% t() %>% as_tibble()
+  # transposing drops the column names; name them explicitly rather than relying on
+  # the deprecated as_tibble.matrix() fallback
+  sol <- bind_cols(what) %>% t() %>% as_tibble(.name_repair = ~ paste0("V", seq_along(.x)))
   k <- apply(sol,1,table)
   
   if (inherits(k, "matrix")){
@@ -187,9 +206,9 @@ rasch_DIF <- function(df, vars_metric, vars_DIF, residuals_PCM, split_strategy =
   
   if (print_results) {
     
-    readr::write_csv(df_DIF_class, file = paste0(path_output,"/Anova_Residuals.csv"))
+    utils::write.csv(df_DIF_class, file = paste0(path_output,"/Anova_Residuals.csv"), row.names = FALSE)
     
-    readr::write_csv(tab_aov_DIF, file = paste0(path_output, "/DIF_rumm.csv"))
+    utils::write.csv(tab_aov_DIF, file = paste0(path_output, "/DIF_rumm.csv"), row.names = FALSE)
     
   }
   

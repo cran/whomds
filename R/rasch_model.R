@@ -8,7 +8,7 @@
 #' 
 #' @return a list with results from the Rasch Model:
 #' \item{model}{the results from the Rasch Model}
-#' \item{df_score}{a tibble with the items used in the analysis and the person abilities}
+#' \item{df_score}{a tibble with the items used in the analysis, the person abilities (\code{person_pars}) and their standard errors (\code{person_pars_se}, on the same logit scale as \code{person_pars}; \code{NA} where eRm could not estimate one, e.g. for some extreme scores)}
 #' \item{thresholds}{the item thresholds (i.e., crossings)}
 #' \item{person_parameters}{person abilities}
 #' \item{PSI}{the person-separation index}
@@ -24,6 +24,23 @@
 #' 
 #' @references Christensen, K. B., Makransky, G., & Horton, M. (2017). Critical Values for Yen’s Q 3 : Identification of Local Dependence in the Rasch Model Using Residual Correlations.  Applied Psychological Measurement, 41(3), 178-194. \doi{10.1177/0146621616677520}
 #' 
+#' @example inst/examples/prep_adults.R
+#' @example inst/examples/prep_adults_model.R
+#' @examples
+#'
+#' \donttest{
+#' model <- rasch_model(df, items, vars_id = "HHID")
+#'
+#' # summaries of how well the data fit the model (see the package vignettes
+#' # for how to interpret them)
+#' model$fit_results         # items that fit, underfit or overfit
+#' model$LID_results         # pairs of items that are locally dependent
+#' model$disordered_results  # items with disordered thresholds
+#' model$PSI                 # person separation index, the reliability
+#'
+#' # each person's ability estimate ("person_pars") and its standard error
+#' head(model$df_score)
+#' }
 #' @export
 #' 
 #' @import eRm
@@ -46,7 +63,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
     as.data.frame() %>% 
     tibble::rownames_to_column("var") %>% 
     as_tibble() %>% 
-    mutate(var = stringr::str_replace_all(var, "thresh beta ", "")) %>% 
+    mutate(var = gsub("thresh beta ", "", var, fixed = TRUE)) %>% 
     tidyr::separate(col = var, into = c("var", "n_threshold"), sep = "\\.") %>% 
     select(-`SE Threshold`) %>% 
     arrange(var, n_threshold) %>% 
@@ -63,6 +80,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
   
   #------------------------------------------------------------------------------- 
   #5. Person separation index
+  # SepRel_1.0.1() is a copy of eRm::SepRel() from eRm 1.0-1; see ?SepRel_1.0.1
   PSIreport <- as.numeric(SepRel_1.0.1(person_parameters)[1])
   
   #-------------------------------------------------------------------------------  
@@ -116,18 +134,18 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
 
   #------------------------------------------------------------------------------- 
   #8. Person Abilities
-  person_par <-  person_parameters$theta.table 
-  names(person_par) <- c("person_pars", "NAgroup", "Interpolated")
-  table(person_par$Interpolated, is.na(person_par$person_pars))                                                               
+  # Select the columns of theta.table by name rather than by position. eRm 1.0-7
+  # inserted a "Std.Error" column into theta.table, so positional renaming
+  # mislabeled the columns and left the last one with an NA name, which made
+  # the left_join() in rasch_rescale() fail.
+  person_par <- person_parameters$theta.table %>% 
+    select(person_pars = "Person Parameter", person_pars_se = "Std.Error", "NAgroup", "Interpolated")
   
-  data_persons <-  cbind(df[,c(vars_id,vars_metric)],person_par)
-  summary(data_persons$person_pars)
+  data_persons <- cbind(df[, c(vars_id, vars_metric)], person_par)
   
-  for(i in 1:nrow(data_persons)){
-    if(is.na(data_persons[i,"person_pars"])){
-      data_persons[i,"person_pars"]<-min(data_persons[,"person_pars"], na.rm=TRUE)
-    }
-  }
+  # Persons without an estimable ability (e.g. all items missing) get the
+  # minimum estimated ability
+  data_persons$person_pars[is.na(data_persons$person_pars)] <- min(data_persons$person_pars, na.rm = TRUE)
   
   ###more persons abilities 
   Person_Abilities <- cbind(person_parameters$thetapar$NAgroup1,person_parameters$se.theta$NAgroup1)
@@ -234,7 +252,7 @@ rasch_model <- function(df, vars_metric, vars_id, print_results = FALSE, path_ou
     utils::write.csv(Residuals_PCM_Recoded,file=paste0(path_output,"/Residuals_PCM.csv"))
     
     #data with abilities
-    readr::write_csv(data_persons, paste0(path_output,"/DatawAbilities.csv"))
+    utils::write.csv(data_persons, paste0(path_output,"/DatawAbilities.csv"), row.names = FALSE)
     
     #person parameters
     utils::write.csv(Person_Abilities, file=paste0(path_output,"/PersonPara.csv"))

@@ -33,7 +33,7 @@ fig_density(
 
 \item{adjust}{a numeric value to pass to \code{adjust} argument of \code{ggplot2::geom_density()}. Default is 2.}
 
-\item{size}{a numeric value to pass to \code{size} argument of \code{ggplot2::geom_density()}. Default is 1.5.}
+\item{size}{a numeric value for the width of the density lines, passed to the \code{linewidth} argument of \code{ggplot2::geom_density()}. Default is 1.5.}
 }
 \value{
 A density figure
@@ -51,11 +51,16 @@ fig_density(df_adults, score = "disability_score", var_color = "sex",
 cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
 fig_density(df_adults, score = "disability_score", var_color = "sex", 
 var_facet = "age_cat",  cutoffs = c(19.1, 34.4, 49.6), x_lab = "Disability score")
+
+# derive the cut-offs from the score with helper_disability_cat()
+cutoffs_derived <- attr(helper_disability_cat(df_adults$disability_score), "cutoffs")
+fig_density(df_adults, score = "disability_score", cutoffs = cutoffs_derived, 
+x_lab = "Disability score")
 }
 \seealso{
-Other figure functions: 
-\code{\link{fig_LID}()},
-\code{\link{fig_dist}()},
-\code{\link{fig_poppyramid}()}
+Other figure functions:
+\code{\link[=fig_LID]{fig_LID()}},
+\code{\link[=fig_dist]{fig_dist()}},
+\code{\link[=fig_poppyramid]{fig_poppyramid()}}
 }
 \concept{figure functions}

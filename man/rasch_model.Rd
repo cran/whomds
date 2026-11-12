@@ -29,7 +29,7 @@ rasch_model(
 \value{
 a list with results from the Rasch Model:
 \item{model}{the results from the Rasch Model}
-\item{df_score}{a tibble with the items used in the analysis and the person abilities}
+\item{df_score}{a tibble with the items used in the analysis, the person abilities (\code{person_pars}) and their standard errors (\code{person_pars_se}, on the same logit scale as \code{person_pars}; \code{NA} where eRm could not estimate one, e.g. for some extreme scores)}
 \item{thresholds}{the item thresholds (i.e., crossings)}
 \item{person_parameters}{person abilities}
 \item{PSI}{the person-separation index}
@@ -47,26 +47,61 @@ Run the Rasch Model and print diagnostic results
 \details{
 The Rasch Model is calculated using the function \code{eRm::PCM()}.
 }
+\examples{
+# rasch_mds() prepares the survey data before calling this function. To use
+# the function on its own, do the same preparation by hand:
+# 1. choose the items (survey questions) that will make up the scale
+items <- paste0("EF", 1:12)
+# 2. shift the responses 1 to 5 down to 0 to 4, as the Rasch Model expects
+df <- df_adults
+df[items] <- df[items] - 1
+# 3. make the ID column text, so that the artificial IDs "MIN" and "MAX" can
+#    be added to it later
+df$HHID <- as.character(df$HHID)
+# 4. record the highest possible value of each item (5, or 4 after the shift)
+max_values <- data.frame(var = items, max_val = 4)
+
+# rasch_mds() also removes people with too many missing answers, here more
+# than 2 of the 12 items. The model takes about 10 seconds on all 2500
+# adults, so this example uses only the first 300 who remain
+n_missing <- rowSums(is.na(df[items]))
+df <- df[n_missing <= 2, ]
+df <- df[1:300, ]
+
+\donttest{
+model <- rasch_model(df, items, vars_id = "HHID")
+
+# summaries of how well the data fit the model (see the package vignettes
+# for how to interpret them)
+model$fit_results         # items that fit, underfit or overfit
+model$LID_results         # pairs of items that are locally dependent
+model$disordered_results  # items with disordered thresholds
+model$PSI                 # person separation index, the reliability
+
+# each person's ability estimate ("person_pars") and its standard error
+head(model$df_score)
+}
+}
 \references{
 Christensen, K. B., Makransky, G., & Horton, M. (2017). Critical Values for Yen’s Q 3 : Identification of Local Dependence in the Rasch Model Using Residual Correlations.  Applied Psychological Measurement, 41(3), 178-194. \doi{10.1177/0146621616677520}
 }
 \seealso{
-Other rasch functions: 
-\code{\link{rasch_DIF}()},
-\code{\link{rasch_df_nest}()},
-\code{\link{rasch_drop}()},
-\code{\link{rasch_factor}()},
-\code{\link{rasch_mds_children}()},
-\code{\link{rasch_mds}()},
-\code{\link{rasch_model_children}()},
-\code{\link{rasch_quality_children_print}()},
-\code{\link{rasch_quality_children}()},
-\code{\link{rasch_rawscore}()},
-\code{\link{rasch_recode}()},
-\code{\link{rasch_rescale_children}()},
-\code{\link{rasch_rescale}()},
-\code{\link{rasch_split_age}()},
-\code{\link{rasch_split}()},
-\code{\link{rasch_testlet}()}
+Other rasch functions:
+\code{\link[=rasch_DIF]{rasch_DIF()}},
+\code{\link[=rasch_df_nest]{rasch_df_nest()}},
+\code{\link[=rasch_drop]{rasch_drop()}},
+\code{\link[=rasch_factor]{rasch_factor()}},
+\code{\link[=rasch_mds]{rasch_mds()}},
+\code{\link[=rasch_mds_children]{rasch_mds_children()}},
+\code{\link[=rasch_model_children]{rasch_model_children()}},
+\code{\link[=rasch_quality_children]{rasch_quality_children()}},
+\code{\link[=rasch_quality_children_print]{rasch_quality_children_print()}},
+\code{\link[=rasch_rawscore]{rasch_rawscore()}},
+\code{\link[=rasch_recode]{rasch_recode()}},
+\code{\link[=rasch_rescale]{rasch_rescale()}},
+\code{\link[=rasch_rescale_children]{rasch_rescale_children()}},
+\code{\link[=rasch_split]{rasch_split()}},
+\code{\link[=rasch_split_age]{rasch_split_age()}},
+\code{\link[=rasch_testlet]{rasch_testlet()}}
 }
 \concept{rasch functions}
